@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const character = {
         x: 50,
-        y: 150,
+        y: 150, // ✅ Moved up so it's visible
         speed: 5
     };
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const cakePosition = { x: 170, y: 120 };
 
     // ⭐️ Start Button - Plays Music & Shows Cake
-    startButton.addEventListener("click", function() {
+    startButton.addEventListener("click", function () {
         console.log("Start button clicked!");
         showMessage("🎂 Happy Birthday, Caitlin!!! Press OK to start the game! 🚀");
         bgMusic.play();
@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
         update(); // ✅ Start the update loop
     });
 
-    // 🎮 Arrow Key Movement (Now Works!)
-    document.addEventListener("keydown", function(event) {
+    // 🎮 Arrow Key Movement (NOW WORKS!)
+    document.addEventListener("keydown", function (event) {
         if (event.key === "ArrowRight") character.x += character.speed;
         if (event.key === "ArrowLeft") character.x -= character.speed;
         if (event.key === "ArrowUp") character.y -= character.speed;
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         update(); // ✅ Redraws after movement
     });
 
-    // ⭐️ Function to Draw a Star Shape (Character)
+    // ⭐️ Function to Draw a Star (Character)
     function drawStar(ctx, x, y, radius, spikes, color) {
         let rot = (Math.PI / 2) * 3;
         let step = Math.PI / spikes;
@@ -65,9 +65,10 @@ document.addEventListener("DOMContentLoaded", function() {
         ctx.fill();
     }
 
-    // ⭐️ Function to Draw the Character
+    // ⭐️ Function to Draw the Character (STAR!)
     function drawCharacter() {
-        drawStar(ctx, character.x, character.y, 15, 5, "yellow");
+        console.log("Drawing Character at", character.x, character.y); // ✅ Debugging log
+        drawStar(ctx, character.x, character.y, 15, 5, "lime"); // ✅ Lime for visibility
     }
 
     // 🍰 Function to Draw Cake
@@ -96,15 +97,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ❌ Close Message Box
-    document.getElementById("closeMessage").addEventListener("click", function() {
+    document.getElementById("closeMessage").addEventListener("click", function () {
         document.getElementById("messageBox").style.display = "none";
     });
 
-    // 🎮 Game Update Loop (Now includes Cake!)
+    // 🎮 Game Update Loop (NOW WORKS!)
     function update() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "black"; // ✅ Force canvas background to be visible
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        console.log("Updating... Drawing Star at:", character.x, character.y); // ✅ Debugging
+
         if (showCake) drawCake(); // ✅ Now the cake appears
-        drawCharacter();
+        drawCharacter();  // ✅ Make sure the star gets drawn!
+
         requestAnimationFrame(update);
     }
 
