@@ -1,20 +1,33 @@
+/* 🎮 Import the Retro Font */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* 🌑 Retro Background */
 body {
     background-color: black;
     color: limegreen;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', cursive !important;
     text-align: center;
     overflow: hidden;
 }
 
+/* 🕹️ Game Container */
 .game-container {
     margin-top: 50px;
 }
 
+/* 🎨 Fix Canvas Blurriness */
+canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 2px solid white;
+    display: block;
+    margin: auto;
+}
+
+/* 🟡 Retro Buttons */
 button {
     background-color: #ffcc00;
-    border: 2px solid black;
+    border: 3px solid black;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -25,6 +38,7 @@ button:hover {
     background-color: #ff8800;
 }
 
+/* 💬 Hidden Message (Konami Code or Game Event) */
 #hiddenMessage {
     display: none;
     font-size: 18px;
@@ -33,7 +47,28 @@ button:hover {
     animation: glow 1s infinite alternate;
 }
 
+/* ✨ Glowing Text Animation */
 @keyframes glow {
     from { text-shadow: 0 0 5px cyan; }
     to { text-shadow: 0 0 15px cyan; }
+}
+
+/* 🎂 Retro Pop-Up Message */
+#messageBox {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+    color: limegreen;
+    font-family: 'Press Start 2P', cursive;
+    padding: 20px;
+    border: 2px solid limegreen;
+    text-align: center;
+    width: 60%;
+}
+
+#messageText {
+    font-size: 16px;
 }
