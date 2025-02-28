@@ -36,6 +36,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
         update(); // ✅ Redraws after movement
     });
+// ⭐️ Function to Draw a Star Shape (Character)
+function drawStar(ctx, x, y, radius, spikes, color) {
+    let rot = (Math.PI / 2) * 3;
+    let step = Math.PI / spikes;
+    let outerRadius = radius;
+    let innerRadius = radius / 2;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y - outerRadius);
+
+    for (let i = 0; i < spikes; i++) {
+        let xOuter = x + Math.cos(rot) * outerRadius;
+        let yOuter = y + Math.sin(rot) * outerRadius;
+        ctx.lineTo(xOuter, yOuter);
+        rot += step;
+
+        let xInner = x + Math.cos(rot) * innerRadius;
+        let yInner = y + Math.sin(rot) * innerRadius;
+        ctx.lineTo(xInner, yInner);
+        rot += step;
+    }
+
+    ctx.lineTo(x, y - outerRadius);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+}
 
     // ⭐️ Function to Draw the Character
     function drawCharacter() {
