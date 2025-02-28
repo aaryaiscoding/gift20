@@ -88,7 +88,7 @@ function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawCake();
     drawCharacter();
-    drawFallingStars(); // Draw falling stars
+    drawFallingStars();
     checkCollision();
     requestAnimationFrame(update);
 }
@@ -101,7 +101,18 @@ document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowDown") character.y += character.speed;
 });
 
-// 🔥 Collision Detection - Show Secret Message & Start Falling Stars!
+// 🎂 Show Message Box Function
+function showMessage(text) {
+    document.getElementById("messageText").innerText = text;
+    document.getElementById("messageBox").style.display = "block";
+}
+
+// ❌ Close Message Box
+document.getElementById("closeMessage").addEventListener("click", function() {
+    document.getElementById("messageBox").style.display = "none";
+});
+
+// 🔥 Collision Detection - Show Retro Message!
 function checkCollision() {
     let starSize = 15;
     let cakeSize = 70; // Approximate size of cake
@@ -113,7 +124,7 @@ function checkCollision() {
         character.y + starSize > cakePosition.y
     ) {
         document.getElementById("hiddenMessage").style.display = "block";
-        alert("🔥 You found the hidden birthday message!");
+        showMessage("🎁 HAPPY 20TH BIRTHDAY!!! I LOVE YOU!!! 🎉");
         showCake = false; // Hide the cake after collision
 
         // 🌟 Start Falling Stars!
@@ -129,9 +140,8 @@ function checkCollision() {
 
 // 🎵 Start Button - Plays Music & Shows Cake
 document.getElementById("startButton").addEventListener("click", function() {
-    alert("🎂 Happy Birthday, Caitlin!!!");
+    showMessage("🎂 Happy Birthday, Caitlin!!! Press OK to start the game! 🚀");
     document.getElementById("bgMusic").play();
-
     showCake = true;
     update();
 });
