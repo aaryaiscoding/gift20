@@ -17,8 +17,7 @@ body {
 
 /* 🎨 Fix Canvas Blurriness */
 canvas {
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    background-color: black; /* ✅ Ensures star is visible */
     border: 2px solid white;
     display: block;
     margin: auto;
@@ -38,7 +37,7 @@ button:hover {
     background-color: #ff8800;
 }
 
-/* 💬 Hidden Message (Konami Code or Game Event) */
+/* 💬 Hidden Message */
 #hiddenMessage {
     display: none;
     font-size: 18px;
@@ -47,13 +46,13 @@ button:hover {
     animation: glow 1s infinite alternate;
 }
 
-/* ✨ Glowing CRT Text Effect */
+/* ✨ Glowing Text Animation */
 @keyframes glow {
     from { text-shadow: 0 0 5px cyan; }
-    to { text-shadow: 0 0 15px cyan, 0 0 30px #00ff00; }
+    to { text-shadow: 0 0 15px cyan; }
 }
 
-/* 💾 2000s Message Box (Fake Windows XP Pop-Up) */
+/* 💾 2000s Message Box */
 #messageBox {
     display: none;
     position: fixed;
@@ -69,53 +68,4 @@ button:hover {
     width: 70%;
     box-shadow: 0px 0px 10px limegreen;
     animation: fadeIn 0.5s ease-in-out;
-    text-transform: uppercase;
-}
-
-/* 💾 Fake Title Bar for Message Box */
-#messageBox::before {
-    content: "💾 SYSTEM MESSAGE";
-    display: block;
-    background: limegreen;
-    color: black;
-    padding: 5px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* 👾 Message Text */
-#messageText {
-    font-size: 14px;
-    margin-bottom: 10px;
-    padding: 10px;
-    line-height: 1.5;
-}
-
-/* 🕹️ "OK" Button */
-#closeMessage {
-    background-color: black;
-    color: limegreen;
-    font-family: 'Press Start 2P', cursive;
-    border: 2px solid limegreen;
-    padding: 5px 15px;
-    cursor: pointer;
-    animation: blink 1s infinite alternate;
-}
-
-/* ✨ Blinking "OK" Button Effect (Like an Old Game) */
-@keyframes blink {
-    from { opacity: 1; }
-    to { opacity: 0.3; }
-}
-
-#closeMessage:hover {
-    background-color: limegreen;
-    color: black;
-}
-
-/* ✨ Smooth Fade-In Effect */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
