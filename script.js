@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const character = {
         x: 50,
-        y: 200,
+        y: 150,
         speed: 5
     };
 
