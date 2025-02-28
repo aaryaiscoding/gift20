@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const character = {
         x: 50,
-        y: 150, // ✅ Adjusted to be visible
+        y: 150, 
         speed: 5
     };
 
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let fallingStars = [];
 
     const cakePosition = { x: 170, y: 120 };
+    const cakeSize = 40; // ✅ Set cake size for accurate collision
 
     // ⭐️ Start Button - Plays Music & Shows Cake
     startButton.addEventListener("click", function () {
@@ -24,17 +25,17 @@ document.addEventListener("DOMContentLoaded", function () {
         showMessage("🎂 Happy Birthday, Caitlin!!! Press OK to start the game! 🚀");
         bgMusic.play();
         showCake = true;
-        update(); // ✅ Start the update loop
+        update(); 
     });
 
-    // 🎮 Arrow Key Movement (NOW WORKS!)
+    // 🎮 Arrow Key Movement
     document.addEventListener("keydown", function (event) {
         if (event.key === "ArrowRight") character.x += character.speed;
         if (event.key === "ArrowLeft") character.x -= character.speed;
         if (event.key === "ArrowUp") character.y -= character.speed;
         if (event.key === "ArrowDown") character.y += character.speed;
 
-        update(); // ✅ Redraws after movement
+        update();
     });
 
     // ⭐️ Function to Draw a Star (Character)
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ⭐️ Function to Draw the Character (STAR!)
     function drawCharacter() {
-        drawStar(ctx, character.x, character.y, 15, 5, "lime"); // ✅ Lime for visibility
+        drawStar(ctx, character.x, character.y, 15, 5, "yellow");
     }
 
     // 🍰 Function to Draw Cake
@@ -103,9 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🔥 Collision Detection (NOW WORKS!)
     function checkCollision() {
         let starSize = 15;
-        let cakeSize = 50; // Approximate width of the cake
 
-        // 🌟 Simple box collision detection
         if (
             character.x < cakePosition.x + cakeSize &&
             character.x + starSize > cakePosition.x &&
@@ -114,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
             console.log("🎂 COLLISION DETECTED!");
             showMessage("🎁 HAPPY 20TH BIRTHDAY!!! I LOVE YOU!!! 🎉");
-            showCake = false; // Hides the cake after collision
-            startFallingStars(); // 🌠 Start animation
+            showCake = false; 
+            startFallingStars();
         }
     }
 
@@ -123,9 +122,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function startFallingStars() {
         for (let i = 0; i < 20; i++) {
             fallingStars.push({
-                x: Math.random() * canvas.width, // Random X position
-                y: Math.random() * -50, // Start above screen
-                speed: Math.random() * 3 + 1 // Random falling speed
+                x: Math.random() * canvas.width,
+                y: Math.random() * -50,
+                speed: Math.random() * 3 + 1
             });
         }
     }
@@ -134,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function drawFallingStars() {
         fallingStars.forEach((star, index) => {
             drawStar(ctx, star.x, star.y, 5, 5, "white");
-            star.y += star.speed; // Move star downward
+            star.y += star.speed;
 
             if (star.y > canvas.height) {
                 fallingStars.splice(index, 1);
@@ -142,19 +141,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 🎮 Game Update Loop (NOW WORKS!)
+    // 🎮 Game Update Loop
     function update() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "black"; // ✅ Ensures the background stays dark
+        ctx.fillStyle = "black"; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (showCake) drawCake();
         drawCharacter();
-        drawFallingStars(); // ✅ Adds falling stars effect
-        checkCollision(); // ✅ Checks if star touches cake
+        drawFallingStars();
+        checkCollision();
 
         requestAnimationFrame(update);
     }
 
-    update(); // ✅ Draws the star immediately on page load
+    update(); 
 });
