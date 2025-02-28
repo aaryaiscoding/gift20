@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         showMessage("🎂 Happy Birthday, Caitlin!!! Press OK to start the game! 🚀");
         bgMusic.play();
         showCake = true;
-        update();
+        update(); // ✅ Start the update loop
     });
 
     // 🎮 Arrow Key Movement (Now Works!)
@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.key === "ArrowLeft") character.x -= character.speed;
         if (event.key === "ArrowUp") character.y -= character.speed;
         if (event.key === "ArrowDown") character.y += character.speed;
+
+        update(); // ✅ Redraws after movement
     });
+
+    // ⭐️ Function to Draw the Character
+    function drawCharacter() {
+        drawStar(ctx, character.x, character.y, 15, 5, "yellow");
+    }
 
     // 🍰 Function to Draw Cake
     function drawCake() {
@@ -65,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("messageBox").style.display = "none";
     });
 
-    // 🎮 Game Update Loop
+    // 🎮 Game Update Loop (Now includes Cake!)
     function update() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (showCake) drawCake(); // ✅ Now the cake appears
