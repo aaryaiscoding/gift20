@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const character = {
         x: 50,
-        y: 150, // ✅ Moved up so it's visible
+        y: 150, // ✅ Adjusted to be visible
         speed: 5
     };
 
@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ⭐️ Function to Draw the Character (STAR!)
     function drawCharacter() {
-        console.log("Drawing Character at", character.x, character.y); // ✅ Debugging log
         drawStar(ctx, character.x, character.y, 15, 5, "lime"); // ✅ Lime for visibility
     }
 
@@ -101,16 +100,58 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("messageBox").style.display = "none";
     });
 
+    // 🔥 Collision Detection (NOW WORKS!)
+    function checkCollision() {
+        let starSize = 15;
+        let cakeSize = 50; // Approximate width of the cake
+
+        // 🌟 Simple box collision detection
+        if (
+            character.x < cakePosition.x + cakeSize &&
+            character.x + starSize > cakePosition.x &&
+            character.y < cakePosition.y + cakeSize &&
+            character.y + starSize > cakePosition.y
+        ) {
+            console.log("🎂 COLLISION DETECTED!");
+            showMessage("🎁 HAPPY 20TH BIRTHDAY!!! I LOVE YOU!!! 🎉");
+            showCake = false; // Hides the cake after collision
+            startFallingStars(); // 🌠 Start animation
+        }
+    }
+
+    // 🌠 Function to Start Falling Stars
+    function startFallingStars() {
+        for (let i = 0; i < 20; i++) {
+            fallingStars.push({
+                x: Math.random() * canvas.width, // Random X position
+                y: Math.random() * -50, // Start above screen
+                speed: Math.random() * 3 + 1 // Random falling speed
+            });
+        }
+    }
+
+    // 🎨 Function to Draw Falling Stars
+    function drawFallingStars() {
+        fallingStars.forEach((star, index) => {
+            drawStar(ctx, star.x, star.y, 5, 5, "white");
+            star.y += star.speed; // Move star downward
+
+            if (star.y > canvas.height) {
+                fallingStars.splice(index, 1);
+            }
+        });
+    }
+
     // 🎮 Game Update Loop (NOW WORKS!)
     function update() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "black"; // ✅ Force canvas background to be visible
+        ctx.fillStyle = "black"; // ✅ Ensures the background stays dark
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        console.log("Updating... Drawing Star at:", character.x, character.y); // ✅ Debugging
-
-        if (showCake) drawCake(); // ✅ Now the cake appears
-        drawCharacter();  // ✅ Make sure the star gets drawn!
+        if (showCake) drawCake();
+        drawCharacter();
+        drawFallingStars(); // ✅ Adds falling stars effect
+        checkCollision(); // ✅ Checks if star touches cake
 
         requestAnimationFrame(update);
     }
